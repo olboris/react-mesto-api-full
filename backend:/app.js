@@ -13,6 +13,7 @@ const {
 } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const errorsHandler = require('./middlewares/errors');
+const { requestLogger, errorLogger } = require('./middlewares/logger'); 
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { notFound } = require('./controllers/not-found-error');
@@ -40,6 +41,7 @@ const limiter = rateLimit({
 
 app.use(limiter);
 app.use(helmet());
+app.use(requestLogger);
 
 app.use('/users', auth, userRouter);
 app.use('/cards', auth, cardRouter);
@@ -59,6 +61,8 @@ app.post('/signup', celebrate({
 }), createUser);
 
 app.use('*', notFound);
+
+app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
 
