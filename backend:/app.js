@@ -22,7 +22,7 @@ const { notFound } = require('./controllers/not-found-error');
 const { PORT = 3000 } = process.env;
 
 const corsOptions = {
-  origin: 'http://mesto.olboris.students.nomoredomains.club',
+  origin: 'https://mesto.olboris.students.nomoredomains.club',
 };
 
 const app = express();
@@ -35,7 +35,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   runValidators: true,
 });
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
