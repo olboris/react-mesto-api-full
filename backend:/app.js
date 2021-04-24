@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
@@ -20,6 +21,10 @@ const { notFound } = require('./controllers/not-found-error');
 
 const { PORT = 3000 } = process.env;
 
+const corsOptions = {
+  origin: 'http://mesto.olboris.students.nomoredomains.club',
+};
+
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
@@ -30,6 +35,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   runValidators: true,
 });
 
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
