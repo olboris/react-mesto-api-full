@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
   next();
 })
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
