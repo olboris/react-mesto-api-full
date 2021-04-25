@@ -23,14 +23,11 @@ const { PORT = 3000 } = process.env;
 
 const whitelist = [
   'https://mesto.olboris.students.nomoredomains.club',
-  'http://mesto.olboris.students.nomoredomains.club'
+  'http://mesto.olboris.students.nomoredomains.club',
+  'localhost:3000'
 ];
 
 const corsOptions = {
-  /*origin: [
-    'https://mesto.olboris.students.nomoredomains.club',
-    'http://mesto.olboris.students.nomoredomains.club',
-  ],*/
   origin(origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
