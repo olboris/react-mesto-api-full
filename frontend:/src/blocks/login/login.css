@@ -1,0 +1,16 @@
+.login {
+    background-color: #000000;
+    top: 60px;
+    bottom: 112px;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    /*min-width: 320px;
+    min-height: 100vh;*/
+}
+
+/*@media screen and (max-width: 424px) {
+    .page {
+        padding-top: 28px;
+        padding-bottom: 36px;
+    }
+}*/

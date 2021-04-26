@@ -1,0 +1,35 @@
+@import url(./__close-button/popup__close-button.css);
+@import url(./__login-button/popup__login-button.css);
+@import url(./__container/popup__container.css);
+@import url(./__container/_place_enter/popup__container_place_enter.css);
+@import url(./__save-button/popup__save-button.css);
+@import url(./__save-button/_disabled/popup__save-button_disabled.css);
+@import url(./__save-button/_place_enter/popup__save-button_place_enter.css);
+@import url(./__title/popup__title.css);
+@import url(./__title/_place_enter/popup__title_place_enter.css);
+@import url(./__input/popup__input.css);
+@import url(./__input/_type_error/popup__input_type_error.css);
+@import url(./__input/_place_enter/popup__input_place_enter.css);
+@import url(./__input-error/popup__input-error.css);
+@import url(./__input-error/_active/popup__input-error_active.css);
+@import url(./__form/popup__form.css);
+@import url(./__form/_place_enter/popup__form_place_enter.css);
+@import url(./__image/popup__image.css);
+@import url(./__image-container/popup__image-container.css);
+@import url(./__figure/popup__figure.css);
+@import url(./__info-message/popup__info-message.css);
+@import url(./__info-image/popup__info-image.css);
+@import url(./__info-figure/popup__info-figure.css);
+@import url(./__image-caption/popup__image-caption.css);
+
+.popup {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+}
