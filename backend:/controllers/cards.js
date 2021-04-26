@@ -23,10 +23,11 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
+  /*console.log(card.owner.toString(), req.user._id);*/
   const { id } = req.params;
-  console.log(card.owner.toString(), req.user._id);
   Card.findById(id)
     .then((card) => {
+      console.log(card.owner.toString(), req.user._id);
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
