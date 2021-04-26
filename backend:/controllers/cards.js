@@ -23,16 +23,12 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  /*console.log(card.owner.toString(), req.user._id);*/
   const { id } = req.params;
   Card.findById(id)
+    .orFail(new NotFoundError('Карточка не найдена'))
     .then((card) => {
-      console.log(card.owner.toString(), req.user._id);
-      if (!card) {
-        throw new NotFoundError('Карточка не найдена');
-      }
       if (card.owner.toString() !== req.user._id) {
-        throw new BadRequestError('Вы не можете удалить карточку');
+        next(new BadRequestError('Вы не можете удалить карточку'));
       }
       return Card.findByIdAndRemove(id).then(() => res.send({ message: 'Карточка удалена' }));
     })

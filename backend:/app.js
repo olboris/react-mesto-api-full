@@ -14,7 +14,7 @@ const {
 } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const errorsHandler = require('./middlewares/errors');
-const { requestLogger, errorLogger } = require('./middlewares/logger'); 
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { notFound } = require('./controllers/not-found-error');
@@ -24,7 +24,7 @@ const { PORT = 3000 } = process.env;
 const whitelist = [
   'https://mesto.olboris.students.nomoredomains.club',
   'http://mesto.olboris.students.nomoredomains.club',
-  'http://localhost:3000'
+  'http://localhost:3000',
 ];
 
 const corsOptions = {
@@ -50,11 +50,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   runValidators: true,
 });
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
-})
+});
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -77,7 +77,7 @@ app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-}); 
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -90,6 +90,9 @@ app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
+    name: Joi.string().min(2).max(30).default('Жак-Ив Кусто'),
+    about: Joi.string().min(2).max(30).default('Исследователь'),
+    avatar: Joi.string().regex(/^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})/).default('https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png'),
   }),
 }), createUser);
 
