@@ -1,0 +1,7 @@
+.popup__container_place_enter {
+    width: 30%;
+    background-color: black;
+    position: relative;
+    margin: 60px auto 112px;
+    text-align: center;
+}

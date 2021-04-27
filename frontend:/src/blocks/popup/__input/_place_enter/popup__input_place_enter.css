@@ -1,0 +1,11 @@
+.popup__input_place_enter {
+    border: 0;
+    border-bottom: 2px solid rgba(204, 204, 204, 1);
+    font-weight: 400;
+    color:rgba(204, 204, 204, 1);
+    margin: 30px auto 0px;
+    padding: 0;
+    background-color: black;
+    width: 100%;
+    -webkit-text-fill-color: rgba(204, 204, 204, 1);
+}
