@@ -27,10 +27,12 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(id)
     .orFail(next(new NotFoundError('Карточка не найдена')))
     .then((card) => {
-      if (card.owner.toString() === req.user._id) {
-        Card.findByIdAndRemove(id).then(() => res.send({ message: 'Карточка удалена' }));
+      if (card.owner.toString() !== req.user._id) {
+        next(new BadRequestError('Вы не можете удалить карточку'));
       }
-      return next(new BadRequestError('Вы не можете удалить карточку'));
+      return Card.findByIdAndRemove(id)
+        .then(() => res.send({ message: 'Карточка удалена' }))
+        .catch(next);
     })
     .catch((err) => {
       let error;
