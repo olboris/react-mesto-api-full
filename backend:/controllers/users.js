@@ -17,7 +17,7 @@ module.exports.getUsers = (req, res, next) => {
 module.exports.getUserById = (req, res, next) => {
   const { id } = req.params;
   User.findById(id)
-    .orFail(() => new NotFoundError('Пользователь не найден'))
+    .orFail(() => next(new NotFoundError('Пользователь не найден')))
     .then((user) => res.send(user))
     .catch((err) => {
       let error;
@@ -33,7 +33,7 @@ module.exports.getUserById = (req, res, next) => {
 module.exports.getUserInfo = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
-    .orFail(() => new NotFoundError('Пользователь не найден'))
+    .orFail(() => next(new NotFoundError('Пользователь не найден')))
     .then((user) => res.send(user))
     .catch((err) => {
       let error;
@@ -86,7 +86,7 @@ module.exports.updateUser = (req, res, next) => {
     { name: req.body.name, about: req.body.about },
     { new: true, runValidators: true },
   )
-    .orFail(() => new NotFoundError('Пользователь не найден'))
+    .orFail(() => next(new NotFoundError('Пользователь не найден')))
     .then((user) => {
       res.send(user);
     })
@@ -107,7 +107,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     { avatar: req.body.avatar },
     { new: true },
   )
-    .orFail(() => new NotFoundError('Пользователь не найден'))
+    .orFail(() => next(new NotFoundError('Пользователь не найден')))
     .then((user) => {
       res.send(user);
     })

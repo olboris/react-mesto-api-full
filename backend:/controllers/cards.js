@@ -1,5 +1,6 @@
 const Card = require('../models/card');
 const BadRequestError = require('../errors/bad-request-error');
+const ForbiddenError = require('../errors/forbidden-error');
 const NotFoundError = require('../errors/not-found-error');
 
 module.exports.getCards = (req, res, next) => {
@@ -25,10 +26,10 @@ module.exports.createCard = (req, res, next) => {
 module.exports.deleteCard = (req, res, next) => {
   const { id } = req.params;
   Card.findById(id)
-    .orFail(new NotFoundError('Карточка не найдена'))
+    .orFail(() => next(new NotFoundError('Карточка не найдена')))
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
-        throw next(new BadRequestError('Вы не можете удалить карточку'));
+        next(new ForbiddenError('Вы не можете удалить карточку'));
       }
       return Card.findByIdAndRemove(id)
         .then(() => res.send({ message: 'Карточка удалена' }))
@@ -54,7 +55,7 @@ module.exports.likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new NotFoundError('Карточка не найдена');
+        next(new NotFoundError('Карточка не найдена'));
       }
       return res.send(card);
     })
@@ -78,7 +79,7 @@ module.exports.dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new NotFoundError('Карточка не найдена');
+        next(new NotFoundError('Карточка не найдена'));
       }
       return res.send(card);
     })
