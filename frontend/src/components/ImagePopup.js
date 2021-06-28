@@ -17,7 +17,7 @@ function ImagePopup(props) {
       <div ref={popupContainerRef} className="popup__image-container" id="image-container">
         <button onClick={props.onClose} type="button" aria-label="Закрыть" name="imageclose-button" id="imageclose-button" className="popup__close-button"></button>
         <figure className="popup__figure">
-          <img className="popup__image" alt="Картинка" src={`${props.card.link}`} />
+          <iframe frameBorder="0" className="popup__image" alt="Картинка" src={`${props.card.link}`} />
           <figcaption className="popup__image-caption">{props.card.name}</figcaption>
         </figure>
       </div>

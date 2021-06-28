@@ -70,7 +70,7 @@ function App(props) {
   function onRegister(email, password) {
     auth.register(email, password)
       .then(() => {
-        history.push('/sign-in');
+        history.push('/films');
         infoToolSuccess(); 
       })
       .catch((err) => {
